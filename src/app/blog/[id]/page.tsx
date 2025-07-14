@@ -15,9 +15,9 @@ interface Blog {
 }
 
 export default async function BlogPage(props: { params: { id: string } }) {
-      const { params } = await props;  // <-- await here
+  const { params } = props;
 
-  const res = await fetch(`http://localhost:5000/api/blogs/${params.id}`, {
+  const res = await fetch(`/api/blogs/${params.id}`, {
     cache: "no-store",
   });
 
@@ -59,7 +59,6 @@ export default async function BlogPage(props: { params: { id: string } }) {
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
-      {/* Optional Comments Section */}
       <div className="mt-12">
         <h2 className="text-2xl font-semibold mb-2">Comments</h2>
         {blog.comments?.length ? (
@@ -74,7 +73,6 @@ export default async function BlogPage(props: { params: { id: string } }) {
           <p className="text-gray-500">No comments yet.</p>
         )}
       </div>
-      
     </div>
   );
 }
