@@ -1,9 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { notFound } from "next/navigation";
-import moment from "moment";
 import readingTime from "reading-time";
-import CommentForm from "../../dashboard/commentForm";
 
 interface Blog {
   _id: string;
@@ -16,22 +14,35 @@ interface Blog {
   comments?: { author: string; text: string; date: string }[];
 }
 
-type Props = {
+interface PageProps {
   params: {
-    id: string;
+    id: string; // Ensure this is correctly defined
   };
-};
+}
 
-export default async function BlogPage({ params }: Props) {
+export default async function BlogPage({ params }: PageProps) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+
+  console.log("Fetching blog with ID:", params.id); // Debugging log
 
   const res = await fetch(`${baseUrl}/api/blogs/${params.id}`, {
     cache: "no-store",
   });
 
-  if (!res.ok) return notFound();
+  if (!res.ok) {
+    console.error("Failed to fetch blog:", res.statusText);
+    return notFound();
+  }
 
-  const blog: Blog = await res.json();
+  let blog: Blog;
+
+  try {
+    blog = await res.json();
+  } catch (error) {
+    console.error("Failed to parse JSON:", error);
+    return notFound();
+  }
+
   const stats = readingTime(blog.content);
 
   // ... rest of your JSX
