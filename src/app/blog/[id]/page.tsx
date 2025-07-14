@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'; // Ensure Vercel handles dynamic params
+
 import { notFound } from "next/navigation";
 import moment from "moment";
 import readingTime from "reading-time";
@@ -13,6 +15,13 @@ interface Blog {
   image?: string;
   comments?: { author: string; text: string; date: string }[];
 }
+
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
 
 export default async function BlogPage({ params }: { params: { id: string } }) {
   const res = await fetch(`/api/blogs/${params.id}`, {
