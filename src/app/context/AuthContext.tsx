@@ -1,8 +1,7 @@
 "use client";
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
-
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -10,11 +9,15 @@ type AuthContextType = {
   logout: () => void;
 };
 
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
