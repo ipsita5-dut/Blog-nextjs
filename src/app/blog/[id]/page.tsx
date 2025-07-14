@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import moment from "moment";
 import readingTime from "reading-time";
-import CommentForm from "../../dashboard/commentForm"; // adjust path accordingly
+import CommentForm from "../../dashboard/commentForm";
 
 interface Blog {
   _id: string;
@@ -14,9 +14,7 @@ interface Blog {
   comments?: { author: string; text: string; date: string }[];
 }
 
-export default async function BlogPage(props: { params: { id: string } }) {
-  const { params } = props;
-
+export default async function BlogPage({ params }: { params: { id: string } }) {
   const res = await fetch(`/api/blogs/${params.id}`, {
     cache: "no-store",
   });
