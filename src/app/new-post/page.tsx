@@ -336,13 +336,14 @@ const handleGenerate = async () => {
       alert("No generated content received.");
     }
   } catch (error) {
-    if (error.name === "AbortError") {
-      console.log("Previous request aborted");
-    } else {
-      console.error("Blog generation failed:", error);
-      alert("AI generation failed");
-    }
-  } finally {
+  if (error instanceof DOMException && error.name === "AbortError") {
+    console.log("Previous request aborted");
+  } else {
+    console.error("Blog generation failed:", error);
+    alert("AI generation failed");
+  }
+}
+ finally {
     setAiLoading(false);
   }
 };
