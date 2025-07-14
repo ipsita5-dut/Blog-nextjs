@@ -97,27 +97,31 @@ export default function CommentModal({
         {editId === reply._id && (
           <div className="mt-2">
             <CommentForm
-              initialText={reply.text}
-              label="Update"
-              onSubmit={(updatedText) => {
-                onEditSubmit(reply._id!, updatedText);
-                handleCancel();
-              }}
-              onCancel={handleCancel}
-            />
+  initialText={reply.text}
+  label="Update"
+  onSubmit={(updatedText) => {
+    onEditSubmit(reply._id!, updatedText);
+    handleCancel();
+  }}
+  onEditSubmit={onEditSubmit}
+  onCancel={handleCancel}
+/>
+
           </div>
         )}
 
         {replyId === reply._id && (
           <div className="mt-2">
             <CommentForm
-              label="Reply"
-              onSubmit={(replyText) => {
-                onReplySubmit(reply._id!, replyText);
-                handleCancel();
-              }}
-              onCancel={handleCancel}
-            />
+  label="Reply"
+  onSubmit={(replyText) => {
+    onReplySubmit(reply._id!, replyText);
+    handleCancel();
+  }}
+  onEditSubmit={onEditSubmit}
+  onCancel={handleCancel}
+/>
+
           </div>
         )}
 
