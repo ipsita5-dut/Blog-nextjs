@@ -1,0 +1,19 @@
+import NavBar from "../components/NavBar";
+import Hero from "../components/Hero";
+import BlogSection from "../components/BlogSection";
+import BlogPosts from "../components/BlogPosts";
+import About from "../components/About";
+import Footer from "../components/Footer";
+
+export default function Home() {
+  return (
+    <main>
+      <NavBar/>
+      <Hero />
+      <BlogSection/>
+      <BlogPosts/>
+      <About/>
+      <Footer/>
+    </main>  
+  );
+}
