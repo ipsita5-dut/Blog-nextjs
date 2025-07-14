@@ -26,7 +26,7 @@ interface PageProps {
 export default async function BlogPage({ params }: { params: { id: string } }) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
-  const res = await fetch(`{baseUrl}/api/blogs/${params.id}`, {
+const res = await fetch(`${baseUrl}/api/blogs/${params.id}`, {
     cache: "no-store",
   });
 
