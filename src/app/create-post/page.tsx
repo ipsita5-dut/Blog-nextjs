@@ -51,18 +51,19 @@ export default function CreatePostPage() {
               {moment(blog.createdAt).format("LL")} •{" "}
               {readingTime(blog.content).text} read
             </p>
-            {blog.tags?.length > 0 && (
-              <div className="mt-2">
-                {blog.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="text-xs mr-3 font-medium text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            )}
+            {Array.isArray(blog.tags) && blog.tags.length > 0 && (
+  <div className="mt-2">
+    {blog.tags.map((tag, i) => (
+      <span
+        key={i}
+        className="text-xs mr-3 font-medium text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full"
+      >
+        #{tag}
+      </span>
+    ))}
+  </div>
+)}
+
             {blog.image && (
               <img
                 src={blog.image}
