@@ -1,11 +1,11 @@
-// app/new-post/page.tsx
+// At the top of your file
 "use client";
 import { Suspense } from "react";
-import PostEditorPage from "@/components/PostEditorPage";
+import PostEditorPage from "../components/PostEditorPage"; // assuming the full component you showed is in PostEditorPage
 
-export default function NewPost() {
+export default function Page() {
   return (
-    <Suspense fallback={<p className="text-center mt-12">Loading Editor...</p>}>
+    <Suspense fallback={<div className="text-center mt-12">Loading Editor...</div>}>
       <PostEditorPage />
     </Suspense>
   );
