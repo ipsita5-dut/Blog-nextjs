@@ -1,9 +1,10 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import { notFound } from "next/navigation";
 import moment from "moment";
 import readingTime from "reading-time";
-import CommentForm from "../../dashboard/commentForm";
+import { headers } from "next/headers";
+import CommentForm from "../../dashboard/commentForm"; // only if needed
 
 interface Blog {
   _id: string;
@@ -16,13 +17,16 @@ interface Blog {
   comments?: { author: string; text: string; date: string }[];
 }
 
-// ✅ THIS is the correct format Next.js App Router expects
+// ✅ Inline param type to avoid "Promise" error
 export default async function BlogPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "";
+  const headersList = headers();
+  const host = headersList.get("host");
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const baseUrl = `${protocol}://${host}`;
 
   const res = await fetch(`${baseUrl}/api/blogs/${params.id}`, {
     cache: "no-store",
@@ -37,7 +41,8 @@ export default async function BlogPage({
     <div className="max-w-3xl mx-auto py-10 px-4">
       <h1 className="text-4xl font-bold mb-2">{blog.title}</h1>
       <p className="text-sm text-gray-500 italic mb-4">
-        By {blog.author} • {moment(blog.createdAt).format("LL")} • {stats.text} read
+        By {blog.author} • {moment(blog.createdAt).format("LL")} •{" "}
+        {stats.text} read
       </p>
 
       {blog.tags?.length > 0 && (
