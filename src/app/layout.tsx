@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
-import { SearchProvider } from "./context/SearchContext"; // ✅ import this
+import { SearchProvider } from "./context/SearchContext";
 
+const geist = Geist({ subsets: ["latin"] });
+const geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Versify",
@@ -17,16 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${geist.className} ${geistMono.className}`}>
         <AuthProvider>
-          <SearchProvider> {/* ✅ Wrap with SearchProvider */}
-
-
-        {children}
-                  </SearchProvider>
-
+          <SearchProvider>
+            {children}
+          </SearchProvider>
         </AuthProvider>
-
       </body>
     </html>
   );
