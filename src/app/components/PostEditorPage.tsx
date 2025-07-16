@@ -186,7 +186,7 @@ useEffect(() => {
     
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_AI_API_URL}/api/ai/spellcheck`, {
+      const res = await fetch("/api/ai/spellcheck", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ word }),
@@ -272,7 +272,7 @@ useEffect(() => {
 
   const rawText = editor.getText(); // Extract plain text from editor
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_AI_API_URL}/api/ai/correct`, {
+    const response = await fetch("/api/ai/correct", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -317,7 +317,7 @@ const handleGenerate = async () => {
   abortControllerRef.current = new AbortController();
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_AI_API_URL}/api/ai/generate`, {
+    const res = await fetch("/api/ai/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ topic: title, tone }),
