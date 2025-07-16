@@ -5,7 +5,7 @@ export async function POST(req) {
   try {
     const { text } = await req.json();
 
-    const aiResponse = await fetch("https://blog-ai-production.up.railway.app/api/correct", {
+    const aiResponse = await fetch("https://blog-ai-production.up.railway.app/api/ai/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text }),
