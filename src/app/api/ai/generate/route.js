@@ -9,7 +9,7 @@ export async function POST(req) {
   }
 
   try {
-    const response = await axios.post("http://localhost:8000/api/ghostwriter/generate", {
+    const response = await axios.post("http://blog-nextjs-production-4138.up.railway.app/ghostwriter/generate", {
       topic,
       tone,
     });
