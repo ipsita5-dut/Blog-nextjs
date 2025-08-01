@@ -1,7 +1,10 @@
 __pycache__/
 *.pyc
-final-model/
 *.pt
 *.bin
 *.zip
 *.tar.gz
+final-model/
+venv/
+*.log
+*.ipynb
