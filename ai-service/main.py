@@ -13,7 +13,7 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 app = FastAPI()
 
 # Load GPT2 Final Model
-save_directory = r'C:\Users\ipsit\OneDrive\Desktop\SOCIAL_BLOG\ai-service\final-model'
+save_directory = os.path.join(os.path.dirname(__file__), "final-model")
 model = GPT2LMHeadModel.from_pretrained(save_directory, local_files_only=True)
 tokenizer = GPT2Tokenizer.from_pretrained(save_directory, local_files_only=True)
 tokenizer.pad_token = tokenizer.eos_token
