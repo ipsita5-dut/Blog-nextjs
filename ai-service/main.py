@@ -13,9 +13,13 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 app = FastAPI()
 
 # Load GPT2 Final Model
-save_directory = os.path.join(os.path.dirname(__file__), "final-model")
-model = GPT2LMHeadModel.from_pretrained(save_directory, local_files_only=True)
-tokenizer = GPT2Tokenizer.from_pretrained(save_directory, local_files_only=True)
+# ✅ Hugging Face Model Info
+model_name = "Ipsita04/finetuned-model"
+hf_token = os.getenv("HF_TOKEN")
+
+# ✅ Load model from Hugging Face Hub
+tokenizer = GPT2Tokenizer.from_pretrained(model_name, token=hf_token)
+model = GPT2LMHeadModel.from_pretrained(model_name, token=hf_token)
 tokenizer.pad_token = tokenizer.eos_token
 
 # Setup device
@@ -27,6 +31,8 @@ model.eval()
 expansion_generator = pipeline(
     "text-generation", model="gpt2-medium", device=0 if torch.cuda.is_available() else -1
 )
+
+app = FastAPI()
 
 # Define Request Schema
 class BlogRequest(BaseModel):
