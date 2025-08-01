@@ -1,8 +1,0 @@
-**/__pycache__/
-*.safetensors
-*.pt
-*.bin
-final-model/
-*.zip
-.vscode/
-.git/
