@@ -10,7 +10,6 @@ import os
 # Configure Gemini API Key (Replace with your actual key or use env variable)
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-app = FastAPI()
 
 # Load GPT2 Final Model
 # ✅ Hugging Face Model Info
